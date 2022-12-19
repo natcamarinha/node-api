@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/natcamarinha/node-api/issues"
   },
-  "homepage": "https://github.com/natcamarinha/node-api#readme"
+  "homepage": "https://github.com/natcamarinha/node-api#readme",
+  "devDependencies": {
+    "git-commit-msg-linter": "^4.4.0"
+  }
 }
