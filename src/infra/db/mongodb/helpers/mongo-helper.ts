@@ -3,12 +3,14 @@ import { AccountModel } from "../../../../domain/models/account"
 
 export const MongoHelper = {
   client: null as MongoClient,
-  async connect(url: string): Promise<void> {
-    this.client = await MongoClient.connect(url)
+  uri: null as unknown as string,
+  async connect(uri: string): Promise<void> {
+    this.uri = uri
+    this.client = await MongoClient.connect(uri)
   },
 
   async disconnect(): Promise<void> {
-    this.client.close()
+    await this.client.close()
   },
 
   getCollection(name: string): Collection {
