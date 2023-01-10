@@ -3,7 +3,8 @@ import { AccountModel } from "../../../../domain/models/account"
 
 export const MongoHelper = {
   client: null as MongoClient,
-  uri: null as unknown as string,
+  uri: null as string,
+
   async connect(uri: string): Promise<void> {
     this.uri = uri
     this.client = await MongoClient.connect(uri)
@@ -11,13 +12,15 @@ export const MongoHelper = {
 
   async disconnect(): Promise<void> {
     await this.client.close()
+    // this.client = null
   },
 
-  getCollection(name: string): Collection {
+  getCollection(name: string): Promise<Collection> {
+    // await this.connect(this.uri)
     return this.client.db().collection(name)
   },
 
-  map (accountData: any, accountId: string): AccountModel {
+  map(accountData: any, accountId: string): AccountModel {
     return {
       email: accountData.email,
       id: accountId,
